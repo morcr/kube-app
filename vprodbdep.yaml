@@ -1,4 +1,4 @@
-apiVersion: apps/latest
+apiVersion: apps/v1
 kind: Deployment
 metadata: 
   name: vprodb
@@ -6,7 +6,7 @@ metadata:
     app: vprodv
 spec:
   selector:
-    matchlabels:
+    matchLabels:
       app: vprodb
   replicas: 1
   template:
@@ -18,11 +18,11 @@ spec:
         - name: vprodb
           image: sixrc/vprofiledb:latest
           volumeMounts:
-            - MountPath: /var/lib/mysql
+            - mountPath: /var/lib/mysql
               name: vpro-db-data
           ports:
             - name: vprodb-port
-              containerPot: 3306
+              containerPort: 3306
           env:
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
